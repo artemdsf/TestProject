@@ -1,14 +1,17 @@
 using System.Collections;
+using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 
 public class TimeController : MonoBehaviour
 {
-	[SerializeField] private MessageWindow _messageWindow;
 	[SerializeField] private string _timeServiceUrl = "https://www.timeanddate.com/worldclock/russia/moscow";
 
 	private string _dateRequest = "date";
+
+	[DllImport("ExternalScript")]
+	private static extern void Alert(string message);
 
 	private void Start()
 	{
@@ -33,7 +36,9 @@ public class TimeController : MonoBehaviour
 		if (webRequest.result == UnityWebRequest.Result.Success)
 		{
 			string time = webRequest.GetResponseHeader(_dateRequest);
-			_messageWindow.Alert("Moscow time received: " + time);
+			
+			Alert("Moscow time received: " + time);
+			gameObject.SetActive(false);
 		}
 		else
 		{
