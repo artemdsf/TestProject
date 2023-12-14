@@ -10,7 +10,7 @@ public class TimeController : MonoBehaviour
 
 	private string _dateRequest = "date";
 
-	[DllImport("ExternalScript")]
+	[DllImport("__Internal")]
 	private static extern void Alert(string message);
 
 	private void Start()
@@ -38,7 +38,6 @@ public class TimeController : MonoBehaviour
 			string time = webRequest.GetResponseHeader(_dateRequest);
 			
 			Alert("Moscow time received: " + time);
-			gameObject.SetActive(false);
 		}
 		else
 		{

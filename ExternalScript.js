@@ -1,4 +1,5 @@
-function Alert(message) 
-{
-	alert(message);
-}
+mergeInto(LibraryManager.library, {
+    Alert: function (message) {
+        window.alert(Pointer_stringify(message));
+    }
+});
